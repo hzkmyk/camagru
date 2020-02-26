@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+	{% block title %}Upload{% endblock %}
+	{% block stylesheet %}
+	<link rel="stylesheet" href="{% static 'css/webcam.css' %}">
+	{% endblock %}
+
+{% block content %}
+<center>
+	{% if user.is_authenticated %}
+		<div class='filters'>
+			<div>
+				<input type="radio" name="img" id="water" value="water" class="img-input" style="display: none">
+				<label for="water"><img src="{% static 'filters/water.png' %}" alt="water.png" id="filter"></label>
+			</div>
+			<div>
+				<input type="radio" name="img" id="frame" value="frame" class="img-input" style="display: none">
+				<label for="frame"><img src="{% static 'filters/frame.png' %}" alt="frame.png" id="filter"></label>
+			</div>
+			<div>
+				<input type="radio" name="img" id="wing" value="wing" class="img-input" style="display: none">
+				<label for="wing"><img src="{% static 'filters/wing.png' %}" alt="wing.png" id="filter"></label>
+			</div>
+		</div>
+		<div class="camera">
+			<div class='container'>
+				<video id="video">Video stream not available.</video>
+				<canvas id="preview"></canvas>
+			</div>
+			<div>
+				<button id="snap">Snap!</button>
+			</div>
+		</div>
+		<canvas id="canvas"></canvas>
+		<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form }}
+			<button type="submit">Upload</button>
+		</form>
+		<script type="text/javascript" src="{% static 'js/webcam.js' %}"></script>
+	{% else %}
+		<p>New to Camagru?  <a href="{% url 'signup' %}">signup</a></p>
+		<p>Already have an account?  <a href="{% url 'login' %}">login</a></p>
+	{% endif %}
+</center>
+{% endblock %}

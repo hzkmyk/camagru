@@ -1,0 +1,96 @@
+.post {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    padding: 2%;
+    margin: 3%;
+    margin-inline-start: 25%;
+    margin-inline-end: 25%;
+}
+
+#photo {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    height: 80%;
+}
+
+.captioncorner {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-top: 10px;
+    margin-inline-start: 10%;
+    font-size: 1.5vw;
+}
+
+#user {
+    font-weight: bold;
+}
+
+#caption {
+    display: flex;
+    margin-inline-start: 2%;
+}
+
+.likecorner {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-top: 10px;
+    margin-inline-start: 10%;
+    margin-inline-end:5%;
+    font-size: 1.5vw;
+}
+
+.likedelete {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-inline-start: 10%;
+    margin-inline-end:5%;
+    font-size: 1.5vw;
+}
+
+#likesforlogin {
+    font-weight: bold;
+    margin-inline-start: 5px;
+}
+
+#likes {
+    font-weight: bold;
+}
+
+#delete {
+    display: flex;
+}
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-inline-start: 10%;
+    margin-top: 1%;
+    font-weight: bold;
+    font-size: 1.2vw;
+}
+
+#com {
+    display:flex;
+    margin-inline-end: 1%;
+    border: 3px solid #cccccc;
+    margin-top: 4%;
+}
+
+button {
+    display: flex;
+    margin-top: 4%;
+}

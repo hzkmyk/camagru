@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block stylesheet %}
+{% endblock %}
+{% block content %}
+<center>
+    {% if user.is_authenticated %}
+        {% if user.profile.email %}
+            <p>Email Notification: ON</p>
+        {%else %}
+            <p>Email Notification: OFF</p>
+        {% endif %}
+        <form action="{% url 'notifications' %}" method="post">
+            {% csrf_token %}
+            {{form}}
+            <input type="submit" value="OK">
+        </form>
+    {% else %}
+        Please log in.
+    {% endif %}
+</center>
+{% endblock %}

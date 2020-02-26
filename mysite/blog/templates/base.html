@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Camagru{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  {% block stylesheet %}{% endblock %}
+</head>
+<body>
+  <main>
+      {% if user.is_authenticated %}
+        <div class='head'>
+            <h1>CAMAGRU</h1>
+            <div class='mainmenu'>
+              <div id='each'><a href="{% url 'home' %}">home</a></div>
+              <div id='each'><a href="{% url 'upload' %}">upload</a></div>
+              <div id='each'><a href="{% url 'mypage' %}">mypage</a></div>
+              <div id='each'><a href="{% url 'notifications' %}">notifications</a></div>
+            </div>
+        </div>
+      {% else %}
+      <div class='head'>  
+          <h1>CAMAGRU</h1>
+          <div class='mainmenu'>
+            <div id='each'><a href="{% url 'home' %}">home</a></div>
+            <div id='each'><a href="{% url 'signup' %}">signup</a></div>
+            <div id='each'><a href="{% url 'login' %}">login</a></div>
+          </div>
+      </div>
+      {% endif %}
+      <div class='line'></div>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+<footer class='footer'>
+  <div id='footcam'>Camagru</div>
+  <div><a href="{% url 'logout' %}">logout</a></div>
+</footer>
+</html>

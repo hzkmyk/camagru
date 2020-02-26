@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+{% block content %}
+<center>
+    {% if user.is_authenticated %}
+        {% for img in images %}
+        <div class='post'>
+            <!-- photo -->
+            <div><img id="photo" src="{{ img.image.url }}" alt="image"></div>
+            <div class='likecorner'>
+                <div><a href="{% url 'like' img.pk %}">❤</a></div>
+                <div id='likesforlogin'>{{ img.num_likes }} likes</div>
+            </div>
+            <!-- caption -->
+            <div class='captioncorner'>
+                <div id='user'>{{ img.user.username }}</div>
+                <div id='caption'>{{ img.caption }}</div>
+            </div>
+            <!-- comment -->
+            {% for comment in img.comments.all %}
+                <div class='captioncorner'>
+                    <div id='user'>{{ comment.user}}</div>
+                    <div id='caption'>{{ comment.text }}</div>
+                </div>
+            {% endfor %}
+            <form action="{% url 'comment' %}" method="POST" class='comment'>
+                {% csrf_token %}
+                <textarea name="text" id="com" cols="75" rows="1"></textarea>
+                <input type="hidden" id="image id" name="imageid" value="{{ img.id }}">
+                <button type="submit">Post</button>
+            </form>
+        </div>
+        {% endfor %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if images.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ images.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ images.number }} of {{ images.paginator.num_pages }}
+                </span>
+        
+                {% if images.has_next %}
+                    <a href="?page={{ images.next_page_number }}">next</a>
+                    <a href="?page={{ images.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    {% else %}
+        {% for img in images %}
+        <div class='post'>
+                <div><img id="photo" src="{{ img.image.url }}" alt="image"></div>
+                <div class='likecorner'>
+                    <div id='likes'>{{ img.num_likes }} likes</div>
+                </div>
+                <div class='captioncorner'>
+                    <div id='user'>{{ img.user }}</div>
+                    <div id='caption'>{{ img.caption }}</div>
+                </div>
+                <!-- comment -->
+                {% for comment in img.comments.all %}
+                <div class='captioncorner'>
+                    <div id='user'>{{ comment.user}}</div>
+                    <div id='caption'>{{ comment.text }}</div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <div class="pagination">
+                <span class="step-links">
+                    {% if images.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ images.previous_page_number }}">previous</a>
+                    {% endif %}
+            
+                    <span class="current">
+                        Page {{ images.number }} of {{ images.paginator.num_pages }}
+                    </span>
+            
+                    {% if images.has_next %}
+                        <a href="?page={{ images.next_page_number }}">next</a>
+                        <a href="?page={{ images.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+    {% endif %}
+</center>
+{% endblock %}
